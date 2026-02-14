@@ -1,8 +1,10 @@
-﻿using ERP.SalesInvoice.Models;
+﻿using ERP.SalesInvoice.Data.Configurations;
+using ERP.SalesInvoice.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +23,7 @@ namespace ERP.SalesInvoice.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(InvoiceConfiguration)));
 
             modelBuilder.Entity<Customer>().HasData(
                 new Customer {Id=1, Name = "Ahmed Ali", Email = "ahmed@gmail.com", Phone = "0100000001", Address = "Cairo" },
